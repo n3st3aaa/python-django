@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Заказ столика</title>
+</head>
+<body>
+<style>
+
+div.buttons{
+        display: flex;
+        float:left;
+        margin: 0 20px 20px 0;
+        padding: 10px;
+}
+
+button.buttons:active{
+        background: green;
+}
+
+.block_hall{
+        padding:50px;
+}
+</style>
+<div class="main">
+    <h1>Закажите столик у нас!</h1>
+
+     <div class="block_input_date">
+         <form action="{% url 'home' %}" method="post" name ="form1">
+             {% csrf_token %}
+                <label>Выберите дату:</label>
+                {{ form_data.data }}
+             <input type="submit" name="ok" value="OK">
+         </form>
+     </div>
+
+    <div class="block_hall">
+         <form action="{% url 'work_button' %}" method="post">
+             {% csrf_token %}
+             {% autoescape off %}
+                {{ buttons }}
+             {% endautoescape %}
+       <!--{% for table in tables %}
+             {% if posts %}
+                 {% for post in posts %}
+                <div>
+                    {% if post.table_number == table.table_number %}
+                        <button disabled>{{ table.table_number }}</button>
+                    {% else %}
+                        <button>{{ table.table_number }}</button>
+                    {% endif %}
+                </div>
+                 {% endfor %}
+              {% else %}
+             <div>
+                <button>{{ table.table_number }}</button>
+             </div>
+             {% endif %}
+        {% endfor %}-->
+         </form>
+    </div>
+    <div class="block_order">
+        {% if active_buttons %}
+            <form action="{% url 'work_field' %}" method="post">
+                 {% csrf_token %}
+            <tr>
+                <td align=left>
+                    ФИО :
+                    <span class="required"></span>
+                    {{ form.name }}
+                    <br><br>
+                    Email :
+                    <span class="required"></span>
+                    {{ form.email }}
+                    <br><br>
+                </td>
+            </tr>
+            <input type="submit" name="register" value="Отправить заказ">
+            </form>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>

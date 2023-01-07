@@ -16,8 +16,8 @@ data = ""
 mas_table_number = []
 active_button = 0
 
-current_datetime = datetime.now()
-min = str(current_datetime.year) + '-' + str(current_datetime.month) + '-' + str(current_datetime.day)
+min = str(datetime.now())[0:10]
+
 
 def all_buttons(reset = False):
     k = 1
